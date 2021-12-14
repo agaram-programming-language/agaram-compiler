@@ -76,7 +76,7 @@ public class Interpreter {
 
 
             for ( Stmt stmt: stmts ) {
-                visitor.execute(stmt);
+               System.out.println(stmt);
             }
         }
         catch (Exception e) {
