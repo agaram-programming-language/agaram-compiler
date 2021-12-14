@@ -1,4 +1,4 @@
-package core.errors;
+package io.agaram.github.errors;
 
 
 public class TokenizerError extends RuntimeException{

@@ -1,4 +1,4 @@
-package core.functions;
+package io.agaram.github.functions;
 
 public class Return extends RuntimeException{
 

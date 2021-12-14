@@ -1,4 +1,4 @@
-package core.memory;
+package io.agaram.github.memory;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

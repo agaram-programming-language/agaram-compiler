@@ -1,9 +1,9 @@
-package core;
+package io.agaram.github;
 
-import core.grammar.ExprVisitor;
-import core.grammar.Stmt;
-import core.grammar.StmtVisitor;
-import core.memory.Environment;
+import io.agaram.github.grammar.ExprVisitor;
+import io.agaram.github.grammar.Stmt;
+import io.agaram.github.grammar.StmtVisitor;
+import io.agaram.github.memory.Environment;
 
 import java.io.BufferedReader;
 import java.io.IOException;

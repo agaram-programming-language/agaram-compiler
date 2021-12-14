@@ -1,4 +1,4 @@
-package core;
+package io.agaram.github;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package core.grammar;
+package io.agaram.github.grammar;
 
-import core.TokenType;
-import core.errors.EvalError;
-import core.memory.Environment;
-import core.types.AgaramType;
-import core.types.Types;
+import io.agaram.github.TokenType;
+import io.agaram.github.errors.EvalError;
+import io.agaram.github.memory.Environment;
+import io.agaram.github.types.AgaramType;
+import io.agaram.github.types.Types;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.val;
@@ -13,17 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
-public class ExprVisitor implements Expr.ExprVisitor<AgaramType> {
+public class ExprVisitor implements io.agaram.github.grammar.Expr.ExprVisitor<AgaramType> {
 
 
     @Setter
-    private StmtVisitor stmtVisitor = null;
+    private io.agaram.github.grammar.StmtVisitor stmtVisitor = null;
 
     @Setter
     private Environment environment;
 
     @Override
-    public AgaramType visit(Expr.BinaryExpr expr) {
+    public AgaramType visit(io.agaram.github.grammar.Expr.BinaryExpr expr) {
 
         Object leftVal = evalExpr(expr.left);
         Object rightVal = evalExpr(expr.right);
@@ -63,21 +63,21 @@ public class ExprVisitor implements Expr.ExprVisitor<AgaramType> {
     }
 
     @Override
-    public AgaramType visit(Expr.UnaryExpr expr) {
+    public AgaramType visit(io.agaram.github.grammar.Expr.UnaryExpr expr) {
         TokenType type = expr.operator.type;
-        Expr right = expr.right;
+        io.agaram.github.grammar.Expr right = expr.right;
         if (type == TokenType.MINUS) {
             return new Types.AgDouble(-((Double)evalExpr(right).getValue()));
         }
         return null;
     }
 
-    public AgaramType evalExpr(Expr expr) {
+    public AgaramType evalExpr(io.agaram.github.grammar.Expr expr) {
         return expr.accept(this);
     }
 
     @Override
-    public AgaramType visit(Expr.LiteralExpr expr) {
+    public AgaramType visit(io.agaram.github.grammar.Expr.LiteralExpr expr) {
         if (expr.token.type == TokenType.NUMBER) {
             return new Types.AgDouble(Double.parseDouble(expr.token.value));
         }
@@ -85,7 +85,7 @@ public class ExprVisitor implements Expr.ExprVisitor<AgaramType> {
     }
 
     @Override
-    public AgaramType visit(Expr.VariableExpr expr) {
+    public AgaramType visit(io.agaram.github.grammar.Expr.VariableExpr expr) {
 
         return typeConvert( environment.getValue(expr.name.value) );
     }
@@ -107,7 +107,7 @@ public class ExprVisitor implements Expr.ExprVisitor<AgaramType> {
     }
 
     @Override
-    public AgaramType visit(Expr.AssignExpr assignExpr) {
+    public AgaramType visit(io.agaram.github.grammar.Expr.AssignExpr assignExpr) {
         String variableName = assignExpr.token.value;
         Object value = evalExpr(assignExpr.right);
         environment.assign(variableName, value);
@@ -115,7 +115,7 @@ public class ExprVisitor implements Expr.ExprVisitor<AgaramType> {
     }
 
     @Override
-    public AgaramType visit(Expr.LogicalExpr logicalExpr) {
+    public AgaramType visit(io.agaram.github.grammar.Expr.LogicalExpr logicalExpr) {
         val left = (Types.AgBoolean)evalExpr(logicalExpr.left);
         val right = (Types.AgBoolean) evalExpr(logicalExpr.right);
         if ( logicalExpr.operator.type == TokenType.LOGICAL_OR ) {
@@ -128,12 +128,12 @@ public class ExprVisitor implements Expr.ExprVisitor<AgaramType> {
     }
 
     @Override
-    public AgaramType visit(Expr.BooleanExpr booleanExpr) {
+    public AgaramType visit(io.agaram.github.grammar.Expr.BooleanExpr booleanExpr) {
         return booleanExpr.eval();
     }
 
     @Override
-    public AgaramType visit(Expr.EqualityExpr equalityExpr) {
+    public AgaramType visit(io.agaram.github.grammar.Expr.EqualityExpr equalityExpr) {
 
         /**
          * When boolean is made to compare with another boolean,
@@ -189,11 +189,11 @@ public class ExprVisitor implements Expr.ExprVisitor<AgaramType> {
     }
 
     @Override
-    public AgaramType visit(Expr.CallExpr expr) {
+    public AgaramType visit(io.agaram.github.grammar.Expr.CallExpr expr) {
         Object callee = evalExpr(expr.callee);
 
         List<AgaramType> arguments = new ArrayList<>();
-        for (Expr argument : expr.arguments) {
+        for (io.agaram.github.grammar.Expr argument : expr.arguments) {
             arguments.add(evalExpr(argument));
         }
         // @todo: Add tamil exception message here.

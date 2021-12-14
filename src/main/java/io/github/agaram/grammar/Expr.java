@@ -1,13 +1,11 @@
-package core.grammar;
+package io.agaram.github.grammar;
 
-import core.Token;
-import core.types.Types;
+import io.agaram.github.Token;
+import io.agaram.github.types.Types;
+import io.agaram.github.TokenType;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-
-import static core.TokenType.FALSE;
-import static core.TokenType.TRUE;
 
 public abstract class Expr {
 
@@ -155,10 +153,10 @@ public abstract class Expr {
         }
 
         public Types.AgBoolean eval() {
-            if ( token.type == TRUE ) {
+            if ( token.type == TokenType.TRUE ) {
                 return new Types.AgBoolean(true);
             }
-            if ( token.type == FALSE ) {
+            if ( token.type == TokenType.FALSE ) {
                 return new Types.AgBoolean(false);
             }
             return null;

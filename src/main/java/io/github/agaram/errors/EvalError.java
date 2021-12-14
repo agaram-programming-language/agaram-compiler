@@ -1,6 +1,6 @@
-package core.errors;
+package io.agaram.github.errors;
 
-import core.Token;
+import io.agaram.github.Token;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package core.types;
+package io.agaram.github.types;
 
 public interface AgaramType {
 
