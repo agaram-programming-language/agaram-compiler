@@ -61,7 +61,7 @@
         <maven.compiler.version>3.8.1</maven.compiler.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <exec.mainClass>io.agaram.github.Interpreter</exec.mainClass>
+        <exec.mainClass>io.github.agaram.Interpreter</exec.mainClass>
     </properties>
     <build>
         <plugins>

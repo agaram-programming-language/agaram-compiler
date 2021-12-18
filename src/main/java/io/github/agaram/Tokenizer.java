@@ -1,7 +1,7 @@
-package io.agaram.github;
+package io.github.agaram;
 
 
-import io.agaram.github.errors.TokenizerError;
+import io.github.agaram.errors.TokenizerError;
 
 import java.util.Arrays;
 import java.util.List;

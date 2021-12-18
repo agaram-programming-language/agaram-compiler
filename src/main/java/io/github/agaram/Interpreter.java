@@ -1,9 +1,9 @@
-package io.agaram.github;
+package io.github.agaram;
 
-import io.agaram.github.grammar.ExprVisitor;
-import io.agaram.github.grammar.Stmt;
-import io.agaram.github.grammar.StmtVisitor;
-import io.agaram.github.memory.Environment;
+import io.github.agaram.grammar.ExprVisitor;
+import io.github.agaram.grammar.Stmt;
+import io.github.agaram.grammar.StmtVisitor;
+import io.github.agaram.memory.Environment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -73,8 +73,6 @@ public class Interpreter {
             ExprVisitor exprVisitor = new ExprVisitor(null, environment);
             StmtVisitor visitor = new StmtVisitor(environment, exprVisitor);
             exprVisitor.setStmtVisitor(visitor);
-
-
             for ( Stmt stmt: stmts ) {
                System.out.println(stmt);
             }

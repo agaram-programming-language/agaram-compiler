@@ -1,16 +1,16 @@
-package io.agaram.github;
+package io.github.agaram;
 
 
 import com.google.inject.Inject;
-import io.agaram.github.grammar.Expr;
-import io.agaram.github.grammar.Stmt;
+import io.github.agaram.grammar.Expr;
+import io.github.agaram.grammar.Stmt;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import static io.agaram.github.TokenType.*;
+import static io.github.agaram.TokenType.*;
 
 public class Parser extends Iterator<Token> {
 

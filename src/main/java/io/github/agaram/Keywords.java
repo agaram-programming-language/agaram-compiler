@@ -1,4 +1,4 @@
-package io.agaram.github;
+package io.github.agaram;
 
 public enum Keywords {
     AND("மற்றும்"),

@@ -1,6 +1,6 @@
 package tests;
 
-import io.agaram.github.Interpreter;
+import io.github.agaram.Interpreter;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

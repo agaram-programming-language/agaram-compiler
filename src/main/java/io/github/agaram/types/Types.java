@@ -1,9 +1,9 @@
-package io.agaram.github.types;
+package io.github.agaram.types;
 
-import io.agaram.github.functions.Return;
-import io.agaram.github.grammar.Stmt;
-import io.agaram.github.grammar.StmtVisitor;
-import io.agaram.github.memory.Environment;
+import io.github.agaram.functions.Return;
+import io.github.agaram.grammar.Stmt;
+import io.github.agaram.grammar.StmtVisitor;
+import io.github.agaram.memory.Environment;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

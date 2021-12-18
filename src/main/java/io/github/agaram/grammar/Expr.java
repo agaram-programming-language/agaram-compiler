@@ -1,8 +1,8 @@
-package io.agaram.github.grammar;
+package io.github.agaram.grammar;
 
-import io.agaram.github.Token;
-import io.agaram.github.types.Types;
-import io.agaram.github.TokenType;
+import io.github.agaram.Token;
+import io.github.agaram.types.Types;
+import io.github.agaram.TokenType;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
