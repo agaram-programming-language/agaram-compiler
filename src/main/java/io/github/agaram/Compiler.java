@@ -13,7 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class Interpreter {
+public class Compiler {
 
     public static final Environment environment = new Environment();
 
@@ -49,7 +49,7 @@ public class Interpreter {
             if ( line.equals("நிறுத்து;") ) {
                 break;
             }
-            Interpreter.interpret(line);
+            Compiler.interpret(line);
         }
     }
 
