@@ -24,7 +24,7 @@ public class InterpreterTest {
     @Test
     public void interpretPrintExpression() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது '123';");
+        Compiler.compile("எழுது '123';");
         assertEquals("123", getWithoutLines(baos));
     }
 
@@ -36,7 +36,7 @@ public class InterpreterTest {
     @Test
     public void interpretAdditionExpr() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது 1 + 2;");
+        Compiler.compile("எழுது 1 + 2;");
         assertEquals("3.0",getWithoutLines(baos));
     }
 
@@ -44,14 +44,14 @@ public class InterpreterTest {
     @Test
     public void interpretSubtractionExpr() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது 1 - 2;");
+        Compiler.compile("எழுது 1 - 2;");
         assertEquals("-1.0",getWithoutLines(baos));
     }
 
     @Test
     public void interpretMulExpr() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது 1 * 2;");
+        Compiler.compile("எழுது 1 * 2;");
         assertEquals("2.0",getWithoutLines(baos));
     }
 
@@ -59,7 +59,7 @@ public class InterpreterTest {
     @Test
     public void interpretDivExpr() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது 4/2;");
+        Compiler.compile("எழுது 4/2;");
         assertEquals("2.0",getWithoutLines(baos));
     }
 
@@ -67,14 +67,14 @@ public class InterpreterTest {
     @Test
     public void interpretGroupedAddExpr() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது (1 + 2) + (3-4);");
+        Compiler.compile("எழுது (1 + 2) + (3-4);");
         assertEquals("2.0",getWithoutLines(baos));
     }
 
     @Test
     public void interpretGroupedMulExpr() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது (1 * 2) + (4 / 2);");
+        Compiler.compile("எழுது (1 * 2) + (4 / 2);");
         assertEquals("4.0",getWithoutLines(baos));
     }
 
@@ -82,7 +82,7 @@ public class InterpreterTest {
     @Test
     public void interpretModuloExpr() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது 10 % 9;");
+        Compiler.compile("எழுது 10 % 9;");
         assertEquals("1.0",getWithoutLines(baos));
     }
 
@@ -90,7 +90,7 @@ public class InterpreterTest {
     @Test
     public void interpretUnaryExpr() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது -10;");
+        Compiler.compile("எழுது -10;");
         assertEquals("-10.0",getWithoutLines(baos));
     }
 
@@ -99,7 +99,7 @@ public class InterpreterTest {
     @Test
     public void interpretGreaterThanSign() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது 10 > 20;");
+        Compiler.compile("எழுது 10 > 20;");
         assertEquals("பொய்",getWithoutLines(baos));
     }
 
@@ -107,7 +107,7 @@ public class InterpreterTest {
     @Test
     public void interpretGreaterThanEqualToSign() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது 10 >= 10;");
+        Compiler.compile("எழுது 10 >= 10;");
         assertEquals("உண்மை",getWithoutLines(baos));
     }
 
@@ -115,14 +115,14 @@ public class InterpreterTest {
     @Test
     public void interpretLesserThanSign() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது 10 < 20;");
+        Compiler.compile("எழுது 10 < 20;");
         assertEquals("உண்மை",getWithoutLines(baos));
     }
 
     @Test
     public void interpretLesserThanEqualToSign() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது 10 <= 10;");
+        Compiler.compile("எழுது 10 <= 10;");
         assertEquals("உண்மை",getWithoutLines(baos));
     }
 
@@ -131,7 +131,7 @@ public class InterpreterTest {
     @Test
     public void interpretVariableAssignmentShouldWorkCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = 10; எழுது எ;");
+        Compiler.compile("மாறி எ = 10; எழுது எ;");
         assertEquals("10.0",getWithoutLines(baos));
     }
 
@@ -139,7 +139,7 @@ public class InterpreterTest {
     @Test
     public void interpretVariableAssignmentShouldWorkCorrectlyForString() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = 10; எழுது எ;");
+        Compiler.compile("மாறி எ = 10; எழுது எ;");
         assertEquals("10.0",getWithoutLines(baos));
     }
 
@@ -147,7 +147,7 @@ public class InterpreterTest {
     @Test
     public void interpretVariableReassignShouldWorkCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = '10';" +
+        Compiler.compile("மாறி எ = '10';" +
                 "மாறி அ;" +
                 "அ = எ;" +
                 "எழுது அ;");
@@ -159,7 +159,7 @@ public class InterpreterTest {
     @Test
     public void interpretVariableReassignInScopeShouldWorkCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = '10';" +
+        Compiler.compile("மாறி எ = '10';" +
                 "{ மாறி எ; எ = '30'; }" +
                 "எழுது எ;");
         assertEquals("10",getWithoutLines(baos));
@@ -170,7 +170,7 @@ public class InterpreterTest {
     @Test
     public void interpretIfLoopCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = 10;"  + "ஒருவேளை ( எ == 10) {  எழுது எ; }");
+        Compiler.compile("மாறி எ = 10;"  + "ஒருவேளை ( எ == 10) {  எழுது எ; }");
         assertEquals("10.0",getWithoutLines(baos));
     }
 
@@ -178,7 +178,7 @@ public class InterpreterTest {
     @Test
     public void interpretIfElseLoopCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = 10;"  + "ஒருவேளை ( எ == 11) {  எழுது எ; } இல்லையென்றால் {  எழுது எ; } ");
+        Compiler.compile("மாறி எ = 10;"  + "ஒருவேளை ( எ == 11) {  எழுது எ; } இல்லையென்றால் {  எழுது எ; } ");
         assertEquals("10.0",getWithoutLines(baos));
     }
 
@@ -186,14 +186,14 @@ public class InterpreterTest {
     @Test
     public void interpretOrOperatorWorkingCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = 10;"  + "ஒருவேளை ( எ == 11 || எ == 10 ) {  எழுது எ; } ");
+        Compiler.compile("மாறி எ = 10;"  + "ஒருவேளை ( எ == 11 || எ == 10 ) {  எழுது எ; } ");
         assertEquals("10.0",getWithoutLines(baos));
     }
 
     @Test
     public void interpretOrOperatorKeywordWorkingCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = 10;"  + "ஒருவேளை ( எ == 11 அல்லது எ == 10 ) {  எழுது எ; } ");
+        Compiler.compile("மாறி எ = 10;"  + "ஒருவேளை ( எ == 11 அல்லது எ == 10 ) {  எழுது எ; } ");
         assertEquals("10.0",getWithoutLines(baos));
     }
 
@@ -201,7 +201,7 @@ public class InterpreterTest {
     @Test
     public void interpretAndOperatorWorkingCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = 10;"  + "ஒருவேளை ( எ < 11 && எ == 10 ) {  எழுது எ; } ");
+        Compiler.compile("மாறி எ = 10;"  + "ஒருவேளை ( எ < 11 && எ == 10 ) {  எழுது எ; } ");
         assertEquals("10.0",getWithoutLines(baos));
     }
 
@@ -209,7 +209,7 @@ public class InterpreterTest {
     @Test
     public void interpretAndOperatorKeywordWorkingCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = 10;"  + "ஒருவேளை ( எ < 11 மற்றும் எ == 10 ) {  எழுது எ; } ");
+        Compiler.compile("மாறி எ = 10;"  + "ஒருவேளை ( எ < 11 மற்றும் எ == 10 ) {  எழுது எ; } ");
         assertEquals("10.0",getWithoutLines(baos));
     }
 
@@ -217,7 +217,7 @@ public class InterpreterTest {
     @Test
     public void interpretWhileLoopCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = 10;"  + "இருப்பின்(எ > 0) { எழுது எ; எ = எ - 1; }");
+        Compiler.compile("மாறி எ = 10;"  + "இருப்பின்(எ > 0) { எழுது எ; எ = எ - 1; }");
         assertEquals("10.09.08.07.06.05.04.03.02.01.0",getWithoutLines(baos));
     }
 
@@ -225,7 +225,7 @@ public class InterpreterTest {
     @Test
     public void interpretForLoopCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret( "ஆக(மாறி எ = 1; எ < 5; எ = எ + 1) { எழுது எ; }");
+        Compiler.compile( "ஆக(மாறி எ = 1; எ < 5; எ = எ + 1) { எழுது எ; }");
         assertEquals("1.02.03.04.0",getWithoutLines(baos));
     }
 
@@ -234,7 +234,7 @@ public class InterpreterTest {
     @Test
     public void interpretDecimalCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = 10.01;"  + "எ = எ + 0.01; எழுது எ;");
+        Compiler.compile("மாறி எ = 10.01;"  + "எ = எ + 0.01; எழுது எ;");
         assertEquals("10.02",getWithoutLines(baos));
     }
 
@@ -242,14 +242,14 @@ public class InterpreterTest {
     @Test
     public void interpretTrueKeywordWorkingCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = 10;"  + "ஒருவேளை ( எ == 10 == உண்மை ) {  எழுது எ; } ");
+        Compiler.compile("மாறி எ = 10;"  + "ஒருவேளை ( எ == 10 == உண்மை ) {  எழுது எ; } ");
         assertEquals("10.0",getWithoutLines(baos));
     }
 
     @Test
     public void interpretFalseKeywordWorkingCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("மாறி எ = 10;"  + "ஒருவேளை ( எ == 11 == பொய் ) {  எழுது எ; } ");
+        Compiler.compile("மாறி எ = 10;"  + "ஒருவேளை ( எ == 11 == பொய் ) {  எழுது எ; } ");
         assertEquals("10.0",getWithoutLines(baos));
     }
 
@@ -258,28 +258,28 @@ public class InterpreterTest {
     @Test
     public void interpretFunctionShouldWorkCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("செயல்பாடு  கூட்டு( அ, ஆ ) {  எழுது அ + ஆ; }    கூட்டு(1,2);  ");
+        Compiler.compile("செயல்பாடு  கூட்டு( அ, ஆ ) {  எழுது அ + ஆ; }    கூட்டு(1,2);  ");
         assertEquals("3.0",getWithoutLines(baos));
     }
 
     @Test
     public void interpretFunctionShouldReturnCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("செயல்பாடு  கூட்டு( அ, ஆ ) {  திருப்பு அ + ஆ; }    எழுது கூட்டு(1,2);  ");
+        Compiler.compile("செயல்பாடு  கூட்டு( அ, ஆ ) {  திருப்பு அ + ஆ; }    எழுது கூட்டு(1,2);  ");
         assertEquals("3.0",getWithoutLines(baos));
     }
 
     @Test
     public void interpretSingleLineCommentCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("// anything here should be ignored for single line ");
+        Compiler.compile("// anything here should be ignored for single line ");
         assertEquals("",getWithoutLines(baos));
     }
 
     @Test
     public void interpretSingleLineCommentCorrectlyWithPrintStatement() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("// anything here should be ignored for single line \n " +
+        Compiler.compile("// anything here should be ignored for single line \n " +
                 "எழுது '123';");
         assertEquals("123",getWithoutLines(baos));
     }
@@ -288,7 +288,7 @@ public class InterpreterTest {
     @Test
     public void interpretStringConcatCorrectly() {
         ByteArrayOutputStream baos = getByteOutputStream();
-        Compiler.interpret("எழுது '123' + '45';");
+        Compiler.compile("எழுது '123' + '45';");
         assertEquals("12345",getWithoutLines(baos));
     }
 

@@ -5,9 +5,7 @@ import io.github.agaram.grammar.Stmt;
 import io.github.agaram.grammar.StmtVisitor;
 import io.github.agaram.memory.Environment;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,8 +21,6 @@ public class Compiler {
             System.exit(64);
         } else if (args.length == 1) {
             runFile(args[0]);
-        } else {
-            runPrompt();
         }
     }
 
@@ -34,28 +30,11 @@ public class Compiler {
     }
 
     private static void run(String s) {
-        interpret(s);
+        compile(s);
     }
 
 
-    private static void runPrompt() throws IOException {
-        InputStreamReader input = new InputStreamReader(System.in);
-        BufferedReader reader = new BufferedReader(input);
-        System.out.println("--- அகரம் v 0.0.1 ---");
-        System.out.println("--- மென்பொருள் எழுத்தாளர்: நவீன் ---");
-        for (;;) {
-            System.out.print("அகரம் v0.0.1 > ");
-            String line = reader.readLine();
-            if ( line.equals("நிறுத்து;") ) {
-                break;
-            }
-            Compiler.interpret(line);
-        }
-    }
-
-
-
-    public static void interpret( String code) {
+    public static void compile(String code) {
         try {
             Tokenizer tokenizer = new Tokenizer(code);
             interpretTokens(tokenizer.getTokens());
@@ -74,7 +53,7 @@ public class Compiler {
             StmtVisitor visitor = new StmtVisitor(environment, exprVisitor);
             exprVisitor.setStmtVisitor(visitor);
             for ( Stmt stmt: stmts ) {
-               System.out.println(stmt);
+               System.out.println(stmt.toString());
             }
         }
         catch (Exception e) {
