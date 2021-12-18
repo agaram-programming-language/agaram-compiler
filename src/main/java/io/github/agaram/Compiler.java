@@ -3,7 +3,6 @@ package io.github.agaram;
 import io.github.agaram.grammar.Stmt;
 import io.github.agaram.memory.Environment;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
