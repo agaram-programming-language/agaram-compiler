@@ -1,14 +1,16 @@
 package io.github.agaram;
 
-import io.github.agaram.grammar.ExprVisitor;
 import io.github.agaram.grammar.Stmt;
-import io.github.agaram.grammar.StmtVisitor;
 import io.github.agaram.memory.Environment;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Compiler {
@@ -20,51 +22,55 @@ public class Compiler {
             System.out.println("அகரம் : script_file_name.அ");
             System.exit(64);
         } else if (args.length == 1) {
-            runFile(args[0]);
+            compileFile(args[0]);
         }
     }
 
-    private static void runFile(String path) throws IOException {
-        byte[] bytes = Files.readAllBytes(Paths.get(path));
-        run(new String(bytes, Charset.defaultCharset()));
+    private static void compileFile(String path) throws IOException {
+        Path sourceFilePath = Paths.get(path);
+        byte[] bytes = Files.readAllBytes(sourceFilePath);
+        List<String> compiledTokens = compile(new String(bytes, Charset.defaultCharset()));
+        if (!compiledTokens.isEmpty()) {
+            // Write to a new file.
+            String sourceFileName = sourceFilePath.getFileName().toString();
+            String compiledFileName = sourceFileName.substring(0, sourceFileName.length() - 2) + ".compiled";
+            Files.write(Paths.get(sourceFilePath.getParent() + "/" + compiledFileName), Collections.singleton(String.join("\n", compiledTokens)));
+        }
     }
 
-    private static void run(String s) {
-        compile(s);
-    }
 
-
-    public static void compile(String code) {
+    public static List<String> compile(String code) {
         try {
             Tokenizer tokenizer = new Tokenizer(code);
-            interpretTokens(tokenizer.getTokens());
-        }
-        catch (Exception e) {
+            return compileTokens(tokenizer.getTokens());
+        } catch (Exception e) {
             System.out.println(e.getMessage() + "\n");
+            return List.of();
         }
     }
 
-    private static void interpretTokens(List<Token> tokens) {
+    private static List<String> compileTokens(List<Token> tokens) {
         Parser parser = new Parser(tokens);
         try {
+
             List<Stmt> stmts = parser.parse();
 
-            ExprVisitor exprVisitor = new ExprVisitor(null, environment);
-            StmtVisitor visitor = new StmtVisitor(environment, exprVisitor);
-            exprVisitor.setStmtVisitor(visitor);
-            for ( Stmt stmt: stmts ) {
-               System.out.println(stmt.toString());
+            List<String> compiledStatements = new ArrayList<>();
+
+            for (Stmt stmt : stmts) {
+                compiledStatements.add(stmt.toString());
             }
-        }
-        catch (Exception e) {
+
+            return compiledStatements;
+
+        } catch (Exception e) {
             System.out.println(e.getMessage() + "\n");
             //System.exit(1);
+            return List.of();
         }
 
 
     }
-
-
 
 
 }
